@@ -12,7 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HarryPotter">
         <activity
-            android:name=".MainActivity"
+            android:name=".controller.Feiticos"
+            android:exported="false" />
+        <activity
+            android:name=".controller.EstudantePorCasa"
+            android:exported="false" />
+        <activity
+            android:name=".controller.ProfessorEscola"
+            android:exported="false" />
+        <activity
+            android:name=".controller.PersonagemPorID"
+            android:exported="false" />
+        <activity
+            android:name=".controller.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
