@@ -12,10 +12,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Estudante Por Casa"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.5">
+
+        <RadioButton
+            android:id="@+id/rbGryffindor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gryffindor" />
+
+        <RadioButton
+            android:id="@+id/rbSlytherin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Slytherin" />
+
+        <RadioButton
+            android:id="@+id/rbRavenclaw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ravenclaw" />
+
+        <RadioButton
+            android:id="@+id/rbHufflepuff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hufflepuff" />
+    </RadioGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="444dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.5"
+        tools:itemCount="3"
+        tools:listitem="@layout/recycler_view_student" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
