@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">Harry Potter</string>
+
+    <string name="brand">Wizarding World</string>
+    <string name="welcome_label">BEM-VINDO AO PORTAL</string>
+    <string name="welcome_title">Explore a Magia de Hogwarts</string>
+
+    <string name="card_characters">Personagens</string>
+    <string name="card_characters_sub">Conheça as lendas bruxas</string>
+    <string name="card_professors">Professores</string>
+    <string name="card_spells">Feitiços</string>
+
+    <string name="spells_hero_title">Livro de Feitiços</string>
+    <string name="spells_search_hint">Procurar feitiço…</string>
+    <string name="profile">Perfil</string>
+    <string name="back">Voltar</string>
+
+    <string name="houses_title">Estudantes por Casa</string>
+    <string name="houses_see_all">Ver todos</string>
+    <string name="houses_subtitle">Explore a linhagem de Hogwarts</string>
+
+    <string name="gryffindor">Gryffindor</string>
+    <string name="gryffindor_trait">Coragem</string>
+    <string name="slytherin">Slytherin</string>
+    <string name="slytherin_trait">Ambição</string>
+    <string name="hufflepuff">Hufflepuff</string>
+    <string name="hufflepuff_trait">Lealdade</string>
+    <string name="ravenclaw">Ravenclaw</string>
+    <string name="ravenclaw_trait">Sabedoria</string>
+
+    <string name="nav_home">Início</string>
+    <string name="nav_characters">Personagens</string>
+    <string name="nav_spells">Feitiços</string>
+    <string name="nav_houses">Casas</string>
+    <string name="exit">Sair</string>
 </resources>

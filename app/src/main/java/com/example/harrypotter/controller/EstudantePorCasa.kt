@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.harrypotter.R
 import com.example.harrypotter.adapter.HouseCharacterAdapter
+import com.example.harrypotter.helper.BottomNav
 import com.example.harrypotter.service.HarryPotterService
 import com.example.harrypotter.service.RetrofitProvider
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +49,11 @@ class EstudantePorCasa : AppCompatActivity() {
             getCharactersByHouse(getHouseByRadioButtonId(checkedId))
         }
 
-        radioGroup.check(R.id.rbGryffindor)
+        // Pre-seleciona a casa enviada pela tela principal (ou Gryffindor por padrao)
+        val house = intent.getStringExtra(EXTRA_HOUSE)
+        radioGroup.check(getRadioButtonIdByHouse(house))
+
+        BottomNav.setup(this, BottomNav.Tab.HOUSES)
     }
 
     private fun getHouseByRadioButtonId(checkedId: Int): String {
@@ -58,6 +63,19 @@ class EstudantePorCasa : AppCompatActivity() {
             R.id.rbHufflepuff -> "hufflepuff"
             else -> "gryffindor"
         }
+    }
+
+    private fun getRadioButtonIdByHouse(house: String?): Int {
+        return when (house?.lowercase()) {
+            "slytherin" -> R.id.rbSlytherin
+            "ravenclaw" -> R.id.rbRavenclaw
+            "hufflepuff" -> R.id.rbHufflepuff
+            else -> R.id.rbGryffindor
+        }
+    }
+
+    companion object {
+        const val EXTRA_HOUSE = "extra_house"
     }
 
     private fun getCharactersByHouse(house: String) {

@@ -2,4 +2,43 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Brand -->
+    <color name="purple_primary">#7C3AED</color>
+    <color name="purple_primary_dark">#6D28D9</color>
+
+    <!-- Backgrounds -->
+    <color name="app_background">#F4F2FB</color>
+    <color name="card_surface">#FFFFFFFF</color>
+
+    <!-- Text -->
+    <color name="text_title">#15131F</color>
+    <color name="text_body">#6B7280</color>
+    <color name="text_muted">#9CA3AF</color>
+    <color name="text_on_image">#FFFFFFFF</color>
+
+    <!-- Houses -->
+    <color name="gryffindor">#A01E1E</color>
+    <color name="slytherin">#16794B</color>
+    <color name="hufflepuff">#E6A700</color>
+    <color name="ravenclaw">#1E3A8A</color>
+
+    <!-- House badges -->
+    <color name="badge_gryffindor">#F3E2C8</color>
+    <color name="badge_gryffindor_text">#8A5A1E</color>
+    <color name="badge_slytherin">#D6EEDF</color>
+    <color name="badge_slytherin_text">#16794B</color>
+    <color name="badge_hufflepuff">#FBEFC2</color>
+    <color name="badge_hufflepuff_text">#9A7400</color>
+    <color name="badge_ravenclaw">#D9E2F7</color>
+    <color name="badge_ravenclaw_text">#1E3A8A</color>
+
+    <!-- Spell icons -->
+    <color name="spell_icon_purple">#7C3AED</color>
+    <color name="spell_icon_red">#E0463C</color>
+
+    <!-- Misc -->
+    <color name="icon_circle">#FFFFFFFF</color>
+    <color name="nav_inactive">#9CA3AF</color>
+    <color name="scrim">#99000000</color>
 </resources>

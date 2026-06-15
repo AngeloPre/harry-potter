@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.harrypotter.R
+import com.example.harrypotter.helper.BottomNav
 import com.example.harrypotter.model.StaffCharacter
 import com.example.harrypotter.service.HarryPotterService
 import com.example.harrypotter.service.RetrofitProvider
@@ -28,7 +29,6 @@ class ProfessorEscola : AppCompatActivity() {
     private lateinit var tvAltNames: TextView
     private lateinit var tvSpeciesProf: TextView
     private lateinit var tvHouseProf: TextView
-    private lateinit var exitBtnProf: Button
     private lateinit var btnSearchProf: Button
     private lateinit var progressBar: ProgressBar
     private lateinit var harryPotterService: HarryPotterService
@@ -48,7 +48,6 @@ class ProfessorEscola : AppCompatActivity() {
         tvAltNames = findViewById(R.id.tvAltNames)
         tvSpeciesProf = findViewById(R.id.tvSpeciesProf)
         tvHouseProf = findViewById(R.id.tvHouseProf)
-        exitBtnProf = findViewById(R.id.exitBtnProf)
         btnSearchProf = findViewById(R.id.btnSearchProf)
         progressBar = findViewById(R.id.progressBar2)
         harryPotterService = HarryPotterService(RetrofitProvider.harryPotterApiService)
@@ -59,9 +58,7 @@ class ProfessorEscola : AppCompatActivity() {
             searchProfessor()
         }
 
-        exitBtnProf.setOnClickListener {
-            finish()
-        }
+        BottomNav.setup(this)
     }
 
     private fun searchProfessor() {

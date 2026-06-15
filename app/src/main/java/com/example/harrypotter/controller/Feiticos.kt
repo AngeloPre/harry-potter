@@ -2,10 +2,11 @@ package com.example.harrypotter.controller
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.ListView
+import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -13,7 +14,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.harrypotter.R
+import com.example.harrypotter.adapter.SpellAdapter
+import com.example.harrypotter.helper.BottomNav
 import com.example.harrypotter.model.Spell
 import com.example.harrypotter.service.HarryPotterService
 import com.example.harrypotter.service.RetrofitProvider
@@ -23,10 +28,11 @@ import kotlinx.coroutines.withContext
 
 class Feiticos : AppCompatActivity() {
 
-    private lateinit var lvSpells: ListView
+    private lateinit var rvSpells: RecyclerView
+    private lateinit var etSearch: EditText
     private lateinit var progressBar: ProgressBar
+    private lateinit var spellAdapter: SpellAdapter
     private lateinit var harryPotterService: HarryPotterService
-    private var spells: List<Spell> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,17 +44,35 @@ class Feiticos : AppCompatActivity() {
             insets
         }
 
-        lvSpells = findViewById(R.id.lvSpells)
+        rvSpells = findViewById(R.id.rvSpells)
+        etSearch = findViewById(R.id.etSearch)
         progressBar = findViewById(R.id.progressBar4)
         harryPotterService = HarryPotterService(RetrofitProvider.harryPotterApiService)
 
-        lvSpells.setOnItemClickListener { _, _, position, _ ->
-            val intent = Intent(this, SpellDetail::class.java)
-            intent.putExtra(SpellDetail.SPELL_EXTRA, spells[position])
-            startActivity(intent)
-        }
+        spellAdapter = SpellAdapter { spell -> openSpellDetail(spell) }
+        rvSpells.layoutManager = LinearLayoutManager(this)
+        rvSpells.adapter = spellAdapter
+
+        etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                spellAdapter.filter(s?.toString().orEmpty())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        findViewById<View>(R.id.btnProfile).setOnClickListener { finish() }
+
+        BottomNav.setup(this, BottomNav.Tab.SPELLS)
 
         getSpellsApi()
+    }
+
+    private fun openSpellDetail(spell: Spell) {
+        val intent = Intent(this, SpellDetail::class.java)
+        intent.putExtra(SpellDetail.SPELL_EXTRA, spell)
+        startActivity(intent)
     }
 
     private fun getSpellsApi() {
@@ -56,18 +80,14 @@ class Feiticos : AppCompatActivity() {
             try {
                 showProgressBar()
 
-                spells = withContext(Dispatchers.IO) {
+                val spells = withContext(Dispatchers.IO) {
                     harryPotterService.getSpells()
                 }
 
                 hideProgressBar()
 
-                val spellNames = spells.map { it.name }
-                lvSpells.adapter = ArrayAdapter(
-                    this@Feiticos,
-                    android.R.layout.simple_list_item_1,
-                    spellNames
-                )
+                spellAdapter.submitList(spells)
+                spellAdapter.filter(etSearch.text?.toString().orEmpty())
             } catch (e: Exception) {
                 hideProgressBar()
                 Log.e("Feiticos", "Erro ao obter feiticos", e)
@@ -82,11 +102,11 @@ class Feiticos : AppCompatActivity() {
 
     private fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
-        lvSpells.visibility = View.GONE
+        rvSpells.visibility = View.GONE
     }
 
     private fun hideProgressBar() {
         progressBar.visibility = View.GONE
-        lvSpells.visibility = View.VISIBLE
+        rvSpells.visibility = View.VISIBLE
     }
 }

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottomNav"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:background="@drawable/bg_bottom_bar"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="12dp">
+
+    <LinearLayout
+        android:id="@+id/navHome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingVertical="6dp">
+
+        <ImageView
+            android:id="@+id/ivHome"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/nav_home"
+            android:src="@drawable/ic_home"
+            android:tint="@color/nav_inactive" />
+
+        <TextView
+            android:id="@+id/tvHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/nav_home"
+            android:textColor="@color/nav_inactive"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/navCharacters"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingVertical="6dp">
+
+        <ImageView
+            android:id="@+id/ivCharacters"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/nav_characters"
+            android:src="@drawable/ic_characters"
+            android:tint="@color/nav_inactive" />
+
+        <TextView
+            android:id="@+id/tvCharacters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/nav_characters"
+            android:textColor="@color/nav_inactive"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/navSpells"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingVertical="6dp">
+
+        <ImageView
+            android:id="@+id/ivSpells"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/nav_spells"
+            android:src="@drawable/ic_spells"
+            android:tint="@color/nav_inactive" />
+
+        <TextView
+            android:id="@+id/tvSpells"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/nav_spells"
+            android:textColor="@color/nav_inactive"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/navHouses"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingVertical="6dp">
+
+        <ImageView
+            android:id="@+id/ivHouses"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/nav_houses"
+            android:src="@drawable/ic_houses"
+            android:tint="@color/nav_inactive" />
+
+        <TextView
+            android:id="@+id/tvHouses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/nav_houses"
+            android:textColor="@color/nav_inactive"
+            android:textSize="11sp" />
+    </LinearLayout>
+</LinearLayout>
