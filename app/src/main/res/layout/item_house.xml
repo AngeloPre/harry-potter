@@ -20,17 +20,19 @@
         android:paddingVertical="20dp">
 
         <FrameLayout
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:id="@+id/houseShield"
+            android:id="@+id/houseShieldBg"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
             android:background="@drawable/shield_gryffindor">
 
             <ImageView
-                android:layout_width="26dp"
-                android:layout_height="26dp"
+                android:id="@+id/houseShield"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
                 android:layout_gravity="center"
                 android:contentDescription="@null"
-                android:src="@drawable/ic_shield" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/gryffindor_brasao" />
         </FrameLayout>
 
         <TextView
