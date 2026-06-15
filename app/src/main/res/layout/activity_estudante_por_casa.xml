@@ -1,85 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:orientation="vertical"
     tools:context=".controller.EstudantePorCasa">
 
+    <!-- Header -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/brand"
+        android:scaleType="fitStart"
+        android:src="@drawable/logo" />
+
+    <!-- Titulo -->
     <TextView
-        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Estudante Por Casa"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/houses_title"
+        android:textColor="@color/text_title"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="0dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.5">
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/houses_pick_subtitle"
+        android:textColor="@color/text_body"
+        android:textSize="15sp" />
 
-        <RadioButton
-            android:id="@+id/rbGryffindor"
-            android:layout_width="match_parent"
+    <!-- Filtro de casas (2x2) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="18dp"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/filterGryffindor"
+            layout="@layout/item_house_filter"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Gryffindor" />
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1" />
 
-        <RadioButton
-            android:id="@+id/rbSlytherin"
-            android:layout_width="match_parent"
+        <include
+            android:id="@+id/filterSlytherin"
+            layout="@layout/item_house_filter"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Slytherin" />
+            android:layout_marginStart="6dp"
+            android:layout_weight="1" />
+    </LinearLayout>
 
-        <RadioButton
-            android:id="@+id/rbRavenclaw"
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/filterRavenclaw"
+            layout="@layout/item_house_filter"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Ravenclaw" />
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1" />
 
-        <RadioButton
-            android:id="@+id/rbHufflepuff"
-            android:layout_width="match_parent"
+        <include
+            android:id="@+id/filterHufflepuff"
+            layout="@layout/item_house_filter"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Hufflepuff" />
-    </RadioGroup>
+            android:layout_marginStart="6dp"
+            android:layout_weight="1" />
+    </LinearLayout>
 
+    <!-- Lista -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
         android:clipToPadding="false"
+        android:paddingHorizontal="20dp"
         android:paddingBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNav"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        tools:itemCount="3"
+        android:scrollbars="none"
+        tools:itemCount="4"
         tools:listitem="@layout/recycler_view_student" />
 
     <include
         android:id="@+id/bottomNav"
         layout="@layout/bottom_nav"
-        android:layout_width="0dp"
-        android:layout_height="72dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_width="match_parent"
+        android:layout_height="72dp" />
+</LinearLayout>
