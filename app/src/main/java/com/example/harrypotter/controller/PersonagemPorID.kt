@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.harrypotter.R
+import com.example.harrypotter.helper.BottomNav
 import com.example.harrypotter.helper.CharacterIdMapper
 import com.example.harrypotter.model.CharacterById
 import com.example.harrypotter.service.HarryPotterService
@@ -32,7 +33,6 @@ class PersonagemPorID : AppCompatActivity() {
     private lateinit var casaTextView: TextView
     private lateinit var fotoImageView: ImageView
     private lateinit var botaoPesquisar: Button
-    private lateinit var botaoSair: Button
     private lateinit var progressBar: ProgressBar
     private lateinit var harryPotterService: HarryPotterService
 
@@ -52,7 +52,6 @@ class PersonagemPorID : AppCompatActivity() {
         casaTextView = findViewById(R.id.tvHouse)
         fotoImageView = findViewById(R.id.ivPhoto)
         botaoPesquisar = findViewById(R.id.btnSearch)
-        botaoSair = findViewById(R.id.btnExit)
         progressBar = findViewById(R.id.progressBar)
         harryPotterService = HarryPotterService(RetrofitProvider.harryPotterApiService)
 
@@ -62,9 +61,7 @@ class PersonagemPorID : AppCompatActivity() {
             searchCharacterBySimpleId()
         }
 
-        botaoSair.setOnClickListener {
-            finish()
-        }
+        BottomNav.setup(this, BottomNav.Tab.CHARACTERS)
     }
 
     private fun searchCharacterBySimpleId() {
