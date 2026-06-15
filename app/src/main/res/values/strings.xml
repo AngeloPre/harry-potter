@@ -15,6 +15,18 @@
     <string name="profile">Perfil</string>
     <string name="back">Voltar</string>
 
+    <string name="char_identifier">IDENTIFICADOR</string>
+    <string name="char_species">Espécie</string>
+    <string name="char_house">Casa</string>
+    <string name="char_occupation">Ocupação</string>
+    <string name="char_status">Status</string>
+    <string name="char_prev">Anterior</string>
+    <string name="char_next">Próximo</string>
+
+    <string name="prof_search_hint">Buscar professor…</string>
+    <string name="prof_empty">Use a barra de pesquisa para buscar um professor</string>
+    <string name="prof_alt_names">Nomes alternativos</string>
+
     <string name="houses_title">Estudantes por Casa</string>
     <string name="houses_see_all">Ver todos</string>
     <string name="houses_subtitle">Explore a linhagem de Hogwarts</string>
