@@ -7,5 +7,7 @@ data class StaffCharacter(
     @SerializedName("alternate_names")
     val alternateNames: List<String>,
     val species: String,
-    val house: String
+    val house: String,
+    @SerializedName("image")
+    val photo: String = ""
 )

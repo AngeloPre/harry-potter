@@ -21,4 +21,9 @@ object CharacterIdMapper {
     fun validIds(): String {
         return simpleIdToUuid.keys.joinToString()
     }
+
+    // Menor e maior id disponiveis (1..10, sequenciais).
+    fun minId(): Int = simpleIdToUuid.keys.min()
+
+    fun maxId(): Int = simpleIdToUuid.keys.max()
 }

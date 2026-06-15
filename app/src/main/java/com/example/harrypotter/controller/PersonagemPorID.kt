@@ -1,9 +1,8 @@
 package com.example.harrypotter.controller
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Button
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -11,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -31,10 +31,18 @@ class PersonagemPorID : AppCompatActivity() {
     private lateinit var nomeTextView: TextView
     private lateinit var especieTextView: TextView
     private lateinit var casaTextView: TextView
+    private lateinit var ocupacaoTextView: TextView
+    private lateinit var statusTextView: TextView
+    private lateinit var casaBadge: TextView
     private lateinit var fotoImageView: ImageView
-    private lateinit var botaoPesquisar: Button
+    private lateinit var botaoPrev: ImageView
+    private lateinit var botaoNext: ImageView
     private lateinit var progressBar: ProgressBar
     private lateinit var harryPotterService: HarryPotterService
+
+    private val minId = CharacterIdMapper.minId()
+    private val maxId = CharacterIdMapper.maxId()
+    private var currentId = minId
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,40 +58,68 @@ class PersonagemPorID : AppCompatActivity() {
         nomeTextView = findViewById(R.id.tvNome)
         especieTextView = findViewById(R.id.tvSpecies)
         casaTextView = findViewById(R.id.tvHouse)
+        ocupacaoTextView = findViewById(R.id.tvOccupation)
+        statusTextView = findViewById(R.id.tvStatus)
+        casaBadge = findViewById(R.id.tvHouseBadge)
         fotoImageView = findViewById(R.id.ivPhoto)
-        botaoPesquisar = findViewById(R.id.btnSearch)
+        botaoPrev = findViewById(R.id.btnPrev)
+        botaoNext = findViewById(R.id.btnNext)
         progressBar = findViewById(R.id.progressBar)
         harryPotterService = HarryPotterService(RetrofitProvider.harryPotterApiService)
 
-        clearCharacterInfo()
+        botaoPrev.setOnClickListener { goToId(currentId - 1) }
+        botaoNext.setOnClickListener { goToId(currentId + 1) }
 
-        botaoPesquisar.setOnClickListener {
-            searchCharacterBySimpleId()
+        // Clicar/editar o numero: confirma ao pressionar "ok" ou ao sair do campo
+        idEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_GO) {
+                commitTypedId()
+                idEditText.clearFocus()
+                true
+            } else {
+                false
+            }
+        }
+        idEditText.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) commitTypedId()
         }
 
         BottomNav.setup(this, BottomNav.Tab.CHARACTERS)
+
+        goToId(minId)
     }
 
-    private fun searchCharacterBySimpleId() {
-        val simpleId = idEditText.text.toString().trim().toIntOrNull()
-
-        if (simpleId == null) {
-            Toast.makeText(this, "Digite um ID numerico", Toast.LENGTH_SHORT).show()
-            return
+    /** Le o id digitado, valida e carrega; se invalido, volta ao id atual. */
+    private fun commitTypedId() {
+        val typed = idEditText.text.toString().trim().toIntOrNull()
+        if (typed == null) {
+            idEditText.setText(currentId.toString())
+        } else {
+            goToId(typed)
         }
+    }
 
-        val uuid = CharacterIdMapper.getUuid(simpleId)
+    /** Navega para um id, travando entre minId e maxId (nao volta abaixo de 1). */
+    private fun goToId(id: Int) {
+        val clamped = id.coerceIn(minId, maxId)
+        currentId = clamped
+        idEditText.setText(clamped.toString())
+        idEditText.setSelection(idEditText.text.length)
 
-        if (uuid == null) {
-            Toast.makeText(
-                this,
-                "ID invalido. Use: ${CharacterIdMapper.validIds()}",
-                Toast.LENGTH_SHORT
-            ).show()
-            return
-        }
+        updateArrows()
 
+        val uuid = CharacterIdMapper.getUuid(clamped) ?: return
         getCharacterApi(uuid)
+    }
+
+    private fun updateArrows() {
+        setArrowEnabled(botaoPrev, currentId > minId)
+        setArrowEnabled(botaoNext, currentId < maxId)
+    }
+
+    private fun setArrowEnabled(arrow: ImageView, enabled: Boolean) {
+        arrow.isEnabled = enabled
+        arrow.alpha = if (enabled) 1f else 0.3f
     }
 
     private fun getCharacterApi(uuid: String) {
@@ -101,16 +137,10 @@ class PersonagemPorID : AppCompatActivity() {
                 if (character != null) {
                     showCharacterInfo(character)
                 } else {
-                    clearCharacterInfo()
-                    Toast.makeText(
-                        this@PersonagemPorID,
-                        "Personagem nao encontrado",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this@PersonagemPorID, "Personagem nao encontrado", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 hideProgressBar()
-                Log.e("PersonagemPorID", "Erro ao obter personagem", e)
                 Toast.makeText(
                     this@PersonagemPorID,
                     "Erro ao obter personagem: ${e.message}",
@@ -121,34 +151,81 @@ class PersonagemPorID : AppCompatActivity() {
     }
 
     private fun showCharacterInfo(character: CharacterById) {
-        nomeTextView.text = "Nome: ${character.name}"
-        especieTextView.text = "Especie: ${character.species}"
-        casaTextView.text = "Casa: ${character.house.ifBlank { "Sem casa" }}"
+        nomeTextView.text = character.name
+        especieTextView.text = translateSpecies(character.species)
+        casaTextView.text = character.house.ifBlank { "Sem casa" }
+        ocupacaoTextView.text = occupationOf(character)
+        statusTextView.text = if (character.alive) "Vivo" else "Morto"
+
+        bindHouseBadge(character.house)
 
         if (character.photo.isNotBlank()) {
             Picasso.get().load(character.photo).into(fotoImageView)
         } else {
             fotoImageView.setImageDrawable(null)
-            Toast.makeText(this, "Personagem sem foto", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun clearCharacterInfo() {
-        nomeTextView.text = ""
-        especieTextView.text = ""
-        casaTextView.text = ""
-        fotoImageView.setImageDrawable(null)
+    private fun bindHouseBadge(house: String) {
+        val colorRes = houseColor(house)
+        if (house.isBlank() || colorRes == null) {
+            casaBadge.visibility = View.GONE
+        } else {
+            casaBadge.visibility = View.VISIBLE
+            casaBadge.text = house
+            casaBadge.background.mutate().setTint(ContextCompat.getColor(this, colorRes))
+        }
+    }
+
+    private fun houseColor(house: String): Int? {
+        return when (house.lowercase()) {
+            "gryffindor" -> R.color.gryffindor
+            "slytherin" -> R.color.slytherin
+            "hufflepuff" -> R.color.hufflepuff
+            "ravenclaw" -> R.color.ravenclaw
+            else -> null
+        }
+    }
+
+    /** Ocupacao derivada dos campos da API (nao ha campo literal de ocupacao). */
+    private fun occupationOf(character: CharacterById): String {
+        return when {
+            character.hogwartsStaff -> "Funcionário de Hogwarts"
+            character.hogwartsStudent -> "Estudante de Hogwarts"
+            character.wizard -> "Bruxo(a)"
+            else -> "—"
+        }
+    }
+
+    private fun translateSpecies(species: String): String {
+        if (species.isBlank()) return "—"
+        return SPECIES_PT[species.lowercase()] ?: species.replaceFirstChar { it.uppercase() }
     }
 
     private fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
-        fotoImageView.visibility = View.GONE
-        botaoPesquisar.isEnabled = false
     }
 
     private fun hideProgressBar() {
         progressBar.visibility = View.GONE
-        fotoImageView.visibility = View.VISIBLE
-        botaoPesquisar.isEnabled = true
+    }
+
+    companion object {
+        private val SPECIES_PT = mapOf(
+            "human" to "Humano",
+            "half-giant" to "Meio-gigante",
+            "giant" to "Gigante",
+            "half-human" to "Meio-humano",
+            "ghost" to "Fantasma",
+            "werewolf" to "Lobisomem",
+            "house-elf" to "Elfo doméstico",
+            "goblin" to "Duende",
+            "centaur" to "Centauro",
+            "vampire" to "Vampiro",
+            "dragon" to "Dragão",
+            "cat" to "Gato",
+            "owl" to "Coruja",
+            "poltergeist" to "Poltergeist"
+        )
     }
 }
