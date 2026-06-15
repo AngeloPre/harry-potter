@@ -14,6 +14,7 @@
     <!-- Text -->
     <color name="text_title">#15131F</color>
     <color name="text_body">#6B7280</color>
+    <color name="text_light">#D9D2E9</color>
     <color name="text_muted">#9CA3AF</color>
     <color name="text_on_image">#FFFFFFFF</color>
 

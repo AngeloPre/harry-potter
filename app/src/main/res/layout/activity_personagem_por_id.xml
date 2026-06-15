@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_background"
+    android:background="@drawable/bg_harrypotter"
     android:orientation="vertical"
     tools:context=".controller.PersonagemPorID">
 
@@ -123,7 +123,7 @@
                 android:layout_marginTop="2dp"
                 android:letterSpacing="0.1"
                 android:text="@string/char_identifier"
-                android:textColor="@color/text_muted"
+                android:textColor="@color/text_light"
                 android:textSize="13sp" />
 
             <!-- Card de detalhes -->

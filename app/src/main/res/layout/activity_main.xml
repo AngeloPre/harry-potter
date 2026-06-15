@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_background"
+    android:background="@drawable/bg_harrypotter"
     tools:context=".controller.MainActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="@string/welcome_title"
-                android:textColor="@color/text_title"
+                android:textColor="@color/text_light"
                 android:textSize="28sp"
                 android:textStyle="bold"
                 android:lineSpacingMultiplier="1.05" />
@@ -217,7 +217,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/houses_title"
-                    android:textColor="@color/text_title"
+                    android:textColor="@color/text_light"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -240,7 +240,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/houses_subtitle"
-                android:textColor="@color/text_body"
+                android:textColor="@color/text_light"
                 android:textSize="13sp" />
 
             <!-- Houses row 1 -->
