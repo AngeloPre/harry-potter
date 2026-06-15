@@ -12,6 +12,7 @@ import com.example.harrypotter.controller.EstudantePorCasa
 import com.example.harrypotter.controller.Feiticos
 import com.example.harrypotter.controller.MainActivity
 import com.example.harrypotter.controller.PersonagemPorID
+import com.example.harrypotter.controller.ProfessorEscola
 
 /**
  * Configura a barra de navegacao inferior (incluida via @layout/bottom_nav)
@@ -19,7 +20,7 @@ import com.example.harrypotter.controller.PersonagemPorID
  */
 object BottomNav {
 
-    enum class Tab { HOME, CHARACTERS, SPELLS, HOUSES }
+    enum class Tab { HOME, CHARACTERS, PROFESSORS, SPELLS, HOUSES }
 
     fun setup(activity: AppCompatActivity, active: Tab? = null) {
         bind(activity, R.id.navHome, R.id.ivHome, R.id.tvHome, active == Tab.HOME) {
@@ -27,6 +28,9 @@ object BottomNav {
         }
         bind(activity, R.id.navCharacters, R.id.ivCharacters, R.id.tvCharacters, active == Tab.CHARACTERS) {
             go(activity, PersonagemPorID::class.java)
+        }
+        bind(activity, R.id.navProfessors, R.id.ivProfessors, R.id.tvProfessors, active == Tab.PROFESSORS) {
+            go(activity, ProfessorEscola::class.java)
         }
         bind(activity, R.id.navSpells, R.id.ivSpells, R.id.tvSpells, active == Tab.SPELLS) {
             go(activity, Feiticos::class.java)
