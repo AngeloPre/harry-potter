@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_background"
+    android:background="@drawable/bg_harrypotter"
     android:orientation="vertical"
     tools:context=".controller.EstudantePorCasa">
 
@@ -27,7 +27,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/houses_title"
-        android:textColor="@color/text_title"
+        android:textColor="@color/card_surface"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -37,10 +37,10 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="4dp"
         android:text="@string/houses_pick_subtitle"
-        android:textColor="@color/text_body"
+        android:textColor="@color/text_light"
         android:textSize="15sp" />
 
-    <!-- Filtro de casas (2x2) -->
+    <!-- Filtro de casas (Radio Buttons 2x2) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,45 +48,73 @@
         android:layout_marginTop="18dp"
         android:orientation="horizontal">
 
-        <include
-            android:id="@+id/filterGryffindor"
-            layout="@layout/item_house_filter"
+        <RadioButton
+            android:id="@+id/rbGryffindor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginEnd="6dp"
-            android:layout_weight="1" />
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingVertical="10dp"
+            android:text="@string/gryffindor"
+            android:textColor="@color/gryffindor"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:buttonTint="@color/gryffindor" />
 
-        <include
-            android:id="@+id/filterSlytherin"
-            layout="@layout/item_house_filter"
+        <RadioButton
+            android:id="@+id/rbSlytherin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginStart="6dp"
-            android:layout_weight="1" />
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingVertical="10dp"
+            android:text="@string/slytherin"
+            android:textColor="@color/slytherin"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:buttonTint="@color/slytherin" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
-        <include
-            android:id="@+id/filterRavenclaw"
-            layout="@layout/item_house_filter"
+        <RadioButton
+            android:id="@+id/rbRavenclaw"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginEnd="6dp"
-            android:layout_weight="1" />
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingVertical="10dp"
+            android:text="@string/ravenclaw"
+            android:textColor="@color/ravenclaw"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:buttonTint="@color/ravenclaw" />
 
-        <include
-            android:id="@+id/filterHufflepuff"
-            layout="@layout/item_house_filter"
+        <RadioButton
+            android:id="@+id/rbHufflepuff"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginStart="6dp"
-            android:layout_weight="1" />
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingVertical="10dp"
+            android:text="@string/hufflepuff"
+            android:textColor="@color/hufflepuff"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:buttonTint="@color/hufflepuff" />
     </LinearLayout>
 
     <!-- Lista -->
