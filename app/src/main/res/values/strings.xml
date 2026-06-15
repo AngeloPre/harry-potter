@@ -30,6 +30,7 @@
     <string name="houses_title">Estudantes por Casa</string>
     <string name="houses_see_all">Ver todos</string>
     <string name="houses_subtitle">Explore a linhagem de Hogwarts</string>
+    <string name="houses_pick_subtitle">Selecione uma casa para ver seus membros.</string>
 
     <string name="gryffindor">Gryffindor</string>
     <string name="gryffindor_trait">Coragem</string>

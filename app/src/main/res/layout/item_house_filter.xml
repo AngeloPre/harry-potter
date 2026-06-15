@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/filterCard"
+    android:layout_width="match_parent"
+    android:layout_height="58dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="#F0EEF6"
+    app:cardCornerRadius="29dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Meia-lua na cor da casa -->
+        <View
+            android:id="@+id/houseArc"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/bg_oval_white" />
+
+        <!-- Circulo branco do escudo -->
+        <View
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/bg_oval_white" />
+
+        <ImageView
+            android:id="@+id/houseShield"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="21dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_shield" />
+
+        <TextView
+            android:id="@+id/houseFilterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="62dp"
+            android:textColor="@color/text_title"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Gryffindor" />
+    </FrameLayout>
+</com.google.android.material.card.MaterialCardView>
