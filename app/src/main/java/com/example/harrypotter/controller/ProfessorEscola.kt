@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
@@ -74,18 +75,23 @@ class ProfessorEscola : AppCompatActivity() {
             val selected = parent.getItemAtPosition(position) as String
             staff.firstOrNull { it.name == selected }?.let { showProfessorInfo(it) }
             acProf.clearFocus()
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(acProf.windowToken, 0)
         }
 
         acProf.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 searchTypedName()
+                acProf.clearFocus()
+                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(acProf.windowToken, 0)
                 true
             } else {
                 false
             }
         }
 
-        BottomNav.setup(this)
+        BottomNav.setup(this, BottomNav.Tab.PROFESSORS)
 
         loadStaff()
     }
