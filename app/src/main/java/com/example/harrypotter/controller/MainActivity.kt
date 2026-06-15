@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
@@ -38,22 +39,22 @@ class MainActivity : AppCompatActivity() {
         findViewById<View>(R.id.seeAll).setOnClickListener { openHouse(null) }
 
         configureHouse(
-            R.id.houseGryffindor, R.drawable.shield_gryffindor,
+            R.id.houseGryffindor, R.drawable.shield_gryffindor, R.drawable.gryffindor_brasao,
             R.string.gryffindor, R.string.gryffindor_trait,
             R.drawable.badge_gryffindor, R.color.badge_gryffindor_text, "gryffindor"
         )
         configureHouse(
-            R.id.houseSlytherin, R.drawable.shield_slytherin,
+            R.id.houseSlytherin, R.drawable.shield_slytherin, R.drawable.slytherin_brasao,
             R.string.slytherin, R.string.slytherin_trait,
             R.drawable.badge_slytherin, R.color.badge_slytherin_text, "slytherin"
         )
         configureHouse(
-            R.id.houseHufflepuff, R.drawable.shield_hufflepuff,
+            R.id.houseHufflepuff, R.drawable.shield_hufflepuff, R.drawable.hufflepuff_brasao,
             R.string.hufflepuff, R.string.hufflepuff_trait,
             R.drawable.badge_hufflepuff, R.color.badge_hufflepuff_text, "hufflepuff"
         )
         configureHouse(
-            R.id.houseRavenclaw, R.drawable.shield_ravenclaw,
+            R.id.houseRavenclaw, R.drawable.shield_ravenclaw, R.drawable.ravenclaw_brasao,
             R.string.ravenclaw, R.string.ravenclaw_trait,
             R.drawable.badge_ravenclaw, R.color.badge_ravenclaw_text, "ravenclaw"
         )
@@ -67,7 +68,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun configureHouse(
         wrapperId: Int,
-        shieldRes: Int,
+        circleBgRes: Int,
+        brasaoRes: Int,
         nameRes: Int,
         traitRes: Int,
         badgeRes: Int,
@@ -75,7 +77,8 @@ class MainActivity : AppCompatActivity() {
         house: String
     ) {
         val card = findViewById<View>(wrapperId)
-        card.findViewById<FrameLayout>(R.id.houseShield).setBackgroundResource(shieldRes)
+        card.findViewById<FrameLayout>(R.id.houseShieldBg).setBackgroundResource(circleBgRes)
+        card.findViewById<ImageView>(R.id.houseShield).setImageResource(brasaoRes)
         card.findViewById<TextView>(R.id.houseName).setText(nameRes)
         card.findViewById<TextView>(R.id.houseBadge).apply {
             setText(traitRes)

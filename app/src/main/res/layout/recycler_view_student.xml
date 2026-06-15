@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/text_title"
+                android:textColor="@color/text_light"
                 android:textSize="19sp"
                 android:textStyle="bold"
                 tools:text="Harry Potter" />
@@ -47,7 +47,7 @@
                 android:layout_marginTop="2dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/text_body"
+                android:textColor="@color/text_light"
                 android:textSize="14sp"
                 tools:text="Gryffindor" />
         </LinearLayout>

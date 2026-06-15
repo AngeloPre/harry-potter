@@ -22,6 +22,8 @@
     <string name="char_status">Status</string>
     <string name="char_prev">Anterior</string>
     <string name="char_next">Próximo</string>
+    <string name="char_id_hint">Informe o ID do personagem…</string>
+    <string name="char_search">Buscar</string>
 
     <string name="prof_search_hint">Buscar professor…</string>
     <string name="prof_empty">Use a barra de pesquisa para buscar um professor</string>
@@ -43,6 +45,7 @@
 
     <string name="nav_home">Início</string>
     <string name="nav_characters">Personagens</string>
+    <string name="nav_professors">Professores</string>
     <string name="nav_spells">Feitiços</string>
     <string name="nav_houses">Casas</string>
     <string name="exit">Sair</string>
